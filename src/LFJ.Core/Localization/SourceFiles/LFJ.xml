@@ -116,5 +116,14 @@
     <text name="Clear">Clear</text>
     <text name="ResetPasswordStepOneInfo">1. Enter your administrator password</text>
     <text name="ResetPasswordStepTwoInfo">2. Copy this random password so you can send it to the user</text>
+    <text name="Products">Products</text>
+    <text name="Orders">Orders</text>
+    <text name="Reservations">Reservations</text>
+    <text name="AddLater">Add Later</text>
+    <text name="Done">Done</text>
+    <text name="AccountNumber">Account Number</text>
+    <text name="AccountTitle">Account Title</text>
+    <text name="BankName">Bank Name</text>
+    <text name="Next">Next</text>
   </texts>
 </localizationDictionary>
