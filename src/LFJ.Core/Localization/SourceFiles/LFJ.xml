@@ -125,5 +125,10 @@
     <text name="AccountTitle">Account Title</text>
     <text name="BankName">Bank Name</text>
     <text name="Next">Next</text>
+    <text name="InviteUser">Invite User</text>
+    <text name="UserAlreadyExistsWithThisEmail">User already exists with this email.</text>
+    <text name="DuplicateEmail">Duplicate Email</text>
+    <text name="EmailAlreadyRegistered">Email already registered</text>
+    <text name="UsernameAlreadyRegistered">Username already registered</text>
   </texts>
 </localizationDictionary>

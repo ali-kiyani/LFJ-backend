@@ -10,6 +10,7 @@ namespace LFJ.EntityFrameworkCore
     {
         /* Define a DbSet for each entity of the application */
         public DbSet<Agents.Agents> Agents { get; set; }
+        public DbSet<Staff.Staff> Staffs { get; set; }
         
         public LFJDbContext(DbContextOptions<LFJDbContext> options)
             : base(options)

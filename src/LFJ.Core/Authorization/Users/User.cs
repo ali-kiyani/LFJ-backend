@@ -9,6 +9,8 @@ namespace LFJ.Authorization.Users
     {
         public const string DefaultPassword = "123qwe";
 
+        public int UserType { get; set; }
+
         public static string CreateRandomPassword()
         {
             return Guid.NewGuid().ToString("N").Truncate(16);
@@ -23,7 +25,8 @@ namespace LFJ.Authorization.Users
                 Name = AdminUserName,
                 Surname = AdminUserName,
                 EmailAddress = emailAddress,
-                Roles = new List<UserRole>()
+                Roles = new List<UserRole>(),
+                UserType = (int)UserTypeEnum.AGENT
             };
 
             user.SetNormalizedNames();

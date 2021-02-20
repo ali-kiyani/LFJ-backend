@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using Abp.Authorization;
@@ -11,6 +13,7 @@ using Abp.Extensions;
 using Abp.IdentityFramework;
 using Abp.Linq.Extensions;
 using Abp.Localization;
+using Abp.Net.Mail;
 using Abp.Runtime.Session;
 using Abp.UI;
 using LFJ.Authorization;
@@ -19,8 +22,10 @@ using LFJ.Authorization.Roles;
 using LFJ.Authorization.Users;
 using LFJ.Roles.Dto;
 using LFJ.Users.Dto;
+using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using LFJ.Staff;
 
 namespace LFJ.Users
 {
@@ -30,26 +35,32 @@ namespace LFJ.Users
         private readonly UserManager _userManager;
         private readonly RoleManager _roleManager;
         private readonly IRepository<Role> _roleRepository;
+        private readonly IRepository<Staff.Staff> _staffRepository;
         private readonly IPasswordHasher<User> _passwordHasher;
         private readonly IAbpSession _abpSession;
         private readonly LogInManager _logInManager;
+        private readonly IEmailSender _emailSender;
 
         public UserAppService(
             IRepository<User, long> repository,
             UserManager userManager,
             RoleManager roleManager,
             IRepository<Role> roleRepository,
+            IRepository<Staff.Staff> staffRepository,
             IPasswordHasher<User> passwordHasher,
             IAbpSession abpSession,
+            IEmailSender emailSender,
             LogInManager logInManager)
             : base(repository)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _roleRepository = roleRepository;
+            _staffRepository = staffRepository;
             _passwordHasher = passwordHasher;
             _abpSession = abpSession;
             _logInManager = logInManager;
+            _emailSender = emailSender;
         }
 
         public override async Task<UserDto> CreateAsync(CreateUserDto input)
@@ -112,6 +123,22 @@ namespace LFJ.Users
                 LocalizationSettingNames.DefaultLanguage,
                 input.LanguageName
             );
+        }
+
+        public async Task<int> InviteUser(InviteUserDto inviteDto)
+        {
+            var alreadyInvited = (await _staffRepository.GetAllListAsync(x => x.Email == inviteDto.Email));
+            if (alreadyInvited != null && alreadyInvited.Count > 0)
+            {
+                return alreadyInvited.ElementAt(0).Id;
+            }
+            Staff.Staff staff = new Staff.Staff
+            {
+                Email = inviteDto.Email,
+                Name = inviteDto.Name,
+                Status = (int)StaffStatusEnum.PENDING
+            };
+            return await _staffRepository.InsertAndGetIdAsync(staff);
         }
 
         protected override User MapToEntity(CreateUserDto createInput)

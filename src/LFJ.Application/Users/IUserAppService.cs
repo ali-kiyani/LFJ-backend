@@ -13,5 +13,7 @@ namespace LFJ.Users
         Task ChangeLanguage(ChangeUserLanguageDto input);
 
         Task<bool> ChangePassword(ChangePasswordDto input);
+
+        Task<int> InviteUser(InviteUserDto inviteDto);
     }
 }

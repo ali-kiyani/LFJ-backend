@@ -26,8 +26,15 @@ namespace LFJ.EntityFrameworkCore.Seed.Host
             }
 
             // Emailing
-            AddSettingIfNotExists(EmailSettingNames.DefaultFromAddress, "admin@mydomain.com", tenantId);
-            AddSettingIfNotExists(EmailSettingNames.DefaultFromDisplayName, "mydomain.com mailer", tenantId);
+            AddSettingIfNotExists(EmailSettingNames.DefaultFromAddress, "lfjofficialmail@gmail.com");
+            AddSettingIfNotExists(EmailSettingNames.DefaultFromDisplayName, "LFJ Official");
+            AddSettingIfNotExists(EmailSettingNames.Smtp.UserName, "lfjofficialmail@gmail.com");
+            //AddSettingIfNotExists(EmailSettingNames.Smtp.Domain, "smtp.gmail.com");
+            AddSettingIfNotExists(EmailSettingNames.Smtp.EnableSsl, "true");
+            AddSettingIfNotExists(EmailSettingNames.Smtp.Host, "smtp.gmail.com");
+            AddSettingIfNotExists(EmailSettingNames.Smtp.Port, "587");
+            AddSettingIfNotExists(EmailSettingNames.Smtp.Password, "lfj.official");
+            AddSettingIfNotExists(EmailSettingNames.Smtp.UseDefaultCredentials, "false");
 
             // Languages
             AddSettingIfNotExists(LocalizationSettingNames.DefaultLanguage, "en", tenantId);

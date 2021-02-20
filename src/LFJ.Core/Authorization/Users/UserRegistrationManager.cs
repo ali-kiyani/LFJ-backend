@@ -37,7 +37,7 @@ namespace LFJ.Authorization.Users
             AbpSession = NullAbpSession.Instance;
         }
 
-        public async Task<User> RegisterAsync(string name, string surname, string emailAddress, string userName, string plainPassword, bool isEmailConfirmed)
+        public async Task<User> RegisterAsync(string name, string surname, string emailAddress, string userName, string plainPassword, bool isEmailConfirmed, int userType)
         {
             CheckForTenant();
 
@@ -52,6 +52,7 @@ namespace LFJ.Authorization.Users
                 IsActive = true,
                 UserName = userName,
                 IsEmailConfirmed = isEmailConfirmed,
+                UserType = userType,
                 Roles = new List<UserRole>()
             };
 

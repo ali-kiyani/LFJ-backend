@@ -9,5 +9,7 @@ namespace LFJ.Authorization.Accounts
         Task<IsTenantAvailableOutput> IsTenantAvailable(IsTenantAvailableInput input);
 
         Task<RegisterOutput> Register(RegisterInput input);
+        Task<RegisterOutput> RegisterInvited(RegisterInvitedInput input);
+        Task<bool> VerifyEmailExist(string email);
     }
 }

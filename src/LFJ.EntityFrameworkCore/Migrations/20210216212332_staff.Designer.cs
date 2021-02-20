@@ -4,14 +4,16 @@ using LFJ.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LFJ.Migrations
 {
     [DbContext(typeof(LFJDbContext))]
-    partial class LFJDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210216212332_staff")]
+    partial class staff
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
